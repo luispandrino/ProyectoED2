@@ -74,7 +74,10 @@
                 socket.on('output', function(data){
                     
                     if(data.length){
-                        for(var x = 0;x < data.length;x++){
+                        var user = document.createElement('ol');
+                        for(var x = 0;x < data.length;x++)
+                        {
+                        
                             // Build out message div
                             var message = document.createElement('div');
                             message.setAttribute('class', 'chat-message');
