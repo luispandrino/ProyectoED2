@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <title>Chat</title>
     <style>
-            #messages{height:300px;}
+        #messages{height:300px;}
     </style>
 </head>
 <body>
@@ -16,19 +16,20 @@
             <div class="col-md-6 offset-md-3 col-sm-12">
                 <h1 class="text-center">
                     Chat
-                    <button id="clear" class="btn btn-danger">Borrar</button>
+                    <button id="clear" class="btn btn-danger">Borrar Conversación</button>
                 </h1>
                 <div id="status"></div>
-                <div id="Chat">
-                        <input type="text" id="username" class="form-control" placeholder="Ingresar Nombre ...">
-                        <br>
-                        <div class="card">
-                            <div id="messages" class="card-block">
-    
+                <div id="chat">
+                    <input type="text" id="username" class="form-control" placeholder="Ingresar Nombre...">
+                    <br>
+                    <div class="card">
+                        <div id="messages" class="card-block">
+
                         </div>
+                    </div>
+                    <br>
+                    <textarea id="textarea" class="form-control" placeholder="Ingresar Mensaje..."></textarea>
                 </div>
-                <br>
-                <textarea id="textarea" class="form-control" placeholder="Ingresar Mensaje..."></textarea>
             </div>
         </div>
     </div>
@@ -36,44 +37,43 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 
     <script>
-    (function (){
-      var elementos = function(id){
-          return document.getElementById(id);
-      }
+        (function(){
+            var element = function(id){
+                return document.getElementById(id);
+            }
 
-      //Obtener elementos 
-      var status = elementos('status');
-      var messages = elementos('messages');
-      var textatera = elementos('textarea');
-      var username = elementos('username');
-      var clear = elementos('clear');
+            // Get Elements
+            var status = element('status');
+            var messages = element('messages');
+            var textarea = element('textarea');
+            var username = element('username');
+            var clearBtn = element('clear');
 
-      //asignar estatus por default
-      var statusDefault = status.textContent;
+            // Set default status
+            var statusDefault = status.textContent;
 
-      var setStatus = function(s){
-        //asignar estatus
-        status.textContent = s;
+            var setStatus = function(s){
+                // Set status
+                status.textContent = s;
 
-        if(s !== statusDefault){
-            var delay = setTimeout(function(){
-               setStatus(statusDefault);
-            },4000);
-        }
-      }
+                if(s !== statusDefault){
+                    var delay = setTimeout(function(){
+                        setStatus(statusDefault);
+                    }, 4000);
+                }
+            }
 
-      // conectar a socket.io
-      
-      var socket = io.connect('http://localhost:3000');
+            // Connect to socket.io
+            var socket = io.connect('http://127.0.0.1:4000');
 
+            // Check for connection
+            if(socket !== undefined){
+                console.log('Connected to socket...');
 
-      //verificar la coneccion
-      if(socket !== undefined){
-          console.log('conectado a socket......');
-
-          socket.on('output', function(data){
-                 //console.log(data);
-                 if(data.length){
+                // Handle Output
+                socket.on('output', function(data){
+                    
+                    if(data.length){
                         for(var x = 0;x < data.length;x++){
                             // Build out message div
                             var message = document.createElement('div');
@@ -83,16 +83,19 @@
                             messages.insertBefore(message, messages.firstChild);
                         }
                     }
-          });
+                });
 
-          socket.on('status', function(data){
+                // Get Status From Server
+                socket.on('status', function(data){
                     // get message status
                     setStatus((typeof data === 'object')? data.message : data);
+
                     // If status is clear, clear text
                     if(data.clear){
                         textarea.value = '';
                     }
                 });
+
                 // Handle Input
                 textarea.addEventListener('keydown', function(event){
                     if(event.which === 13 && event.shiftKey == false){
@@ -101,20 +104,23 @@
                             name:username.value,
                             message:textarea.value
                         });
+
                         event.preventDefault();
                     }
                 })
+
                 // Handle Chat Clear
-                clear.addEventListener('click', function(){
+                clearBtn.addEventListener('click', function(){
                     socket.emit('clear');
                 });
+
                 // Clear Message
                 socket.on('cleared', function(){
                     messages.textContent = '';
                 });
-      }
+            }
 
-    })();
+        })();
     </script>
 </body>
 </html>
