@@ -23,8 +23,8 @@
                     <input type="text" id="username" class="form-control" placeholder="Ingresar Nombre...">
                     <br>
                     <div class="card">
-                        <div id="messages" class="card-block">
-
+                        <div id="messages" class="card-block" style="overflow:scroll">
+                       
                         </div>
                     </div>
                     <br>

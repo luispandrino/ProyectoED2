@@ -3,7 +3,7 @@ const client = require('socket.io').listen(3010).sockets;
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+//obtiene pagina principal del chat
 router.get('/', function(req, res, next) {
   res.render('ChatIndex', { title: 'Express' });
 });
