@@ -26,7 +26,6 @@
 			<label>Password</label>
 			<input type="password" class="form-control" name="password" id="password">{{myKey}}</input><p>
 		</div>
-
 		<button type="submit" class="btn btn-warning btn-lg" id="signup" onclick='location = "/login"' >Registrar</button>
 
 </form> 

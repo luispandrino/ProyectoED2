@@ -101,6 +101,7 @@ app.get('/', function (req, res) {
   res.redirect("/");
   });
   
+  
   function isLoggedIn(req,res,next) {
   if(req.isAuthenticated()){
       return next();

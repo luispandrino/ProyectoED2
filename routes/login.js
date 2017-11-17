@@ -52,6 +52,7 @@ router.post('/', function(req, res, next){
     // Verificar que el usuario y password estén en la base de datos
     res.render('login', { title: 'Iniciar sesión', myKey :key ,content: req.body.jsonContent, tokenValue:token});
 });
+
 module.exports = router;
 
 
