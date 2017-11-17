@@ -7,9 +7,10 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-router.get('/signup', function(req, res, next) {
+/*router.get('/signup', function(req, res, next) {
   res.render('signup');
 });
+
 
 router.get('/login', function(req, res, next) {
   res.render('login');
@@ -40,5 +41,5 @@ router.post('/login', function(req, res){
   var userName = req.body.username;
   var password = req.body.password;
 });
-
+*/
 module.exports = router;

@@ -4,6 +4,8 @@
 	<title>Node Authentication</title>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+	<script src="/javascripts/login.js"></script>
+	<script src="/javascripts/chat.js"></script>
 	<style>
 		body 		{ padding-top:80px; }
 	</style>
@@ -19,23 +21,29 @@
     <div class="alert alert-danger" id="error"> 
     </div>
 
-
+<form method="post" action="/login">
 		<div class="form-group">
 			<label>Nombre de Usuario</label>
-			<input type="text" class="form-control" name="email">
+			<input type="text" name="jsonContent" id="jsonContent" class="form-control">{{content}}</input><p>
 		</div>
 		<div class="form-group">
 			<label>Contraseña</label>
-			<input type="password" class="form-control" name="password">
+			<input type="password" class="form-control" name="password" id="password">{{myKey}}</input><p>
 		</div>
-
+        <button name="generateJ" class="btn btn-success" type="submit">Iniciar sesión</button><br>
+		<br>
+		<br>
+                
+        <textarea rows=2 cols=40 name="output" id="output" >{{tokenValue}}</textarea>
+        <br>
 		<button type="submit" class="btn btn-warning btn-lg" id="login" onclick='location = "/chat"' >Ingresar</button>
-
+				
+</form> 
 	<hr>
 
-	<p>Need an account? <a href="/signup">Signup</a></p>
+	<p>Need an account? <a href="/signup">Sign up</a></p>
 	<p>Or go <a href="/">home</a>.</p>
-</div>
+	</div>
 </div>
 </body>
 </html>
