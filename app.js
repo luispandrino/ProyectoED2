@@ -14,8 +14,8 @@ var app = express();
 var index = require('./routes/index');
 var users = require('./routes/users');
 var chat = require('./routes/server');
-
-
+var login = require('./routes/login');
+var registro = require('./routes/signup');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,6 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/chat',chat);
+app.use('/login', login);
+app.use('/signup', login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -82,7 +84,7 @@ app.get('/', function (req, res) {
   });
   // LOGIN
   // render login form
-  app.get("/login", function(req, res) {
+  /*app.get("/login", function(req, res) {
   res.render("login"); 
   });
   //login logic
@@ -92,12 +94,13 @@ app.get('/', function (req, res) {
   failureRedirect: "/login" 
   }), function(req, res) {
   
-  });
+  });*/
   
   app.get("/logout",function(req, res) {
   req.logout();
   res.redirect("/");
   });
+  
   
   function isLoggedIn(req,res,next) {
   if(req.isAuthenticated()){
