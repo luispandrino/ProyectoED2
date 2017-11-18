@@ -15,7 +15,6 @@
         <div class="row">
             <div class="col-md-6 offset-md-3 col-sm-12">
                 <h1 class="text-center">
-                
                     Chat
                     <button id="clear" class="btn btn-danger">Borrar Conversación</button>
                 </h1>
@@ -71,26 +70,11 @@
             if(socket !== undefined){
                 console.log('Connected to socket...');
 
-                socket.on('MensajePrivado',function(data){
-                    if(data.length){
-                        for(var x = 0;x < data.length;x++)
-                        {
-                        
-                            // Build out message div
-                            var message = document.createElement('div');
-                            message.setAttribute('class', 'chat-message');
-                            message.textContent = data[x].name+": "+data[x].message;
-                            messages.appendChild(message);
-                            messages.insertBefore(message, messages.firstChild);
-                        }
-                    }
-
-                });
-
                 // Handle Output
                 socket.on('output', function(data){
                     
                     if(data.length){
+                        var user = document.createElement('ol');
                         for(var x = 0;x < data.length;x++)
                         {
                         

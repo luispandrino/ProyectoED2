@@ -35,9 +35,10 @@
                 
         <textarea rows=2 cols=40 name="output" id="output" >{{tokenValue}}</textarea>
         <br>
-		<button type="submit" class="btn btn-warning btn-lg" id="login" onclick='location = "/login"' >Ingresar</button>
+		
 				
 </form> 
+<button type="submit" class="btn btn-warning btn-lg" id="login" onclick='location = "/chat"' >Ingresar</button>
 	<hr>
 
 	<p>Need an account? <a href="/signup">Sign up</a></p>
