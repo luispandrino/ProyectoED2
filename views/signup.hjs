@@ -17,7 +17,7 @@
 	<h1>Sign up</h1>
 
     <div class="alert alert-danger" id ="error"> </div>
-<form method="post" action="/login">
+<form method="post" action="/signup">
 		<div class="form-group">
 			<label>Nombre de usuario</label>
 			<input type="text" name="jsonContent" id="jsonContent" class="form-control">{{content}}</input><p>

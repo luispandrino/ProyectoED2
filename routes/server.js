@@ -1,12 +1,12 @@
 const mongo = require('mongodb').MongoClient;
-var edge = require('edge.js');
+/*var edge = require('edge.js');*/
 const client = require('socket.io').listen(3010).sockets;
 var express = require('express');
 var router = express.Router();
 
 //CAPA DE PROCESOS ALTERNOS
 
-var Cifrar = edge.func({
+/*var Cifrar = edge.func({
   assemblyFile: "Libreria.dll",
   typeName: "Libreria.Sdes",
   methodName: "Cifrar"
@@ -15,7 +15,7 @@ var Descifrar = edge.func({
     assemblyFile: "Libreria.dll",
     typeName: "Libreria.Sdes",
     methodName: "Descifrar"
-  });
+  });*/
 
 //obtiene pagina principal del chat
 router.get('/', function(req, res, next) {
@@ -46,10 +46,10 @@ mongo.connect('mongodb://127.0.0.1/mongochat', function(err, db){
             }
 
             // Emit the messages
-            Descifrar(res, function (error, result) {
+            /*Descifrar(res, function (error, result) {
                 if(error) throw error;
                 res = result;
-              });
+              });*/
             socket.emit('output', res);
         });
 
@@ -59,10 +59,10 @@ mongo.connect('mongodb://127.0.0.1/mongochat', function(err, db){
             let message = data.message;
 
 
-            Cifrar(message, function (error, result) {
+           /* Cifrar(message, function (error, result) {
                 if(error) throw error;
                 message = result;
-              });
+              });*/
 
             // Check for name and message
             if(name == '' || message == ''){
